@@ -38,7 +38,7 @@ public class TestCase1 {
         driver.quit();
     }
 
-    @DataProvider
+    @DataProvider(parallel = true)
     public Object[][] getData(){
         Object[][] data = new Object[2][3];
         data[0][0] = "trainer@way2automation.com";
