@@ -13,6 +13,15 @@ import java.util.concurrent.TimeUnit;
 public class TestCase1 {
 
     public WebDriver driver;
+    public static ThreadLocal<WebDriver> dr = new ThreadLocal<WebDriver>();
+
+    public WebDriver getDriver(){
+        return dr.get();
+    }
+
+    public void setWebDriver(WebDriver driver){
+        dr.set(driver);
+    }
 
     @Test(dataProvider = "getData")
     public void doLogin(String username, String password, String browser){
@@ -26,16 +35,18 @@ public class TestCase1 {
             System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "//src//test//resources//executables//geckodriver.exe");
             driver = new FirefoxDriver();
         }
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("https://www.zoho.com/");
 
-        driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/a[3]")).click();
-        driver.findElement(By.xpath("//*[@id='lid']")).sendKeys(username);
-        driver.findElement(By.xpath("//*[@id='pwd']")).sendKeys(password);
-        driver.findElement(By.xpath("//*[@id='signin_submit']")).click();
+        setWebDriver(driver);
+        getDriver().manage().window().maximize();
+        getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        getDriver().get("https://www.zoho.com/");
 
-        driver.quit();
+        getDriver().findElement(By.xpath("/html/body/div[1]/div[2]/div/a[3]")).click();
+        getDriver().findElement(By.xpath("//*[@id='lid']")).sendKeys(username);
+        getDriver().findElement(By.xpath("//*[@id='pwd']")).sendKeys(password);
+        getDriver().findElement(By.xpath("//*[@id='signin_submit']")).click();
+
+        getDriver().quit();
     }
 
     @DataProvider(parallel = true)
