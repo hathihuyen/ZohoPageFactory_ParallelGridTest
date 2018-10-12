@@ -14,7 +14,7 @@ public class ZohoHomePage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "/html/body/div[1]/div[2]/div/a[3]")
+    @FindBy(xpath = "/html/body/div[1]/div[3]/div/a[4]")
     public WebElement logIn;
 
     public ZohoLoginPage gotoLoginPage(){

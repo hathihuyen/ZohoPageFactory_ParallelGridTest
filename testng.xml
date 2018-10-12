@@ -3,14 +3,15 @@
 <suite name="Suite" parallel="tests">
     <test verbose="2" preserve-order="true" name="Test1">
         <classes>
-            <class name="com.hha.zoho.rough.TestCase1">
+            <class name="com.hha.zoho.rough.LoginTest">
                 <methods>
-                    <include name="doLogin"/>
+                    <include name="loginTest"/>
                 </methods>
             </class>
         </classes>
     </test>
-    <test verbose="2" preserve-order="true" name="Test2">
+
+    <!--test verbose="2" preserve-order="true" name="Test2">
         <classes>
             <class name="com.hha.zoho.rough.TestCase2">
                 <methods>
@@ -18,5 +19,5 @@
                 </methods>
             </class>
         </classes>
-    </test>
+    </test-->
 </suite>

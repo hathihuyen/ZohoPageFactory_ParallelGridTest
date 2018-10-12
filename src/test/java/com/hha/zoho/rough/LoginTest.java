@@ -2,6 +2,10 @@ package com.hha.zoho.rough;
 
 import com.hha.zoho.PageObjects.ZohoHomePage;
 import com.hha.zoho.PageObjects.ZohoLoginPage;
+import com.hha.zoho.Utilities.Constants;
+import com.hha.zoho.Utilities.DataProviders;
+import com.hha.zoho.Utilities.DataUtil;
+import com.hha.zoho.Utilities.ExcelReader;
 import org.apache.poi.ss.formula.functions.T;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,17 +14,23 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.Hashtable;
 import java.util.concurrent.TimeUnit;
 
-public class TestCase1 extends BaseTest {
+//public class TestCase1 extends BaseTest {
+public class LoginTest extends BaseTest {
 
-    @Test(dataProvider = "getData")
-    public void doLogin(String username, String password, String browser){
-        openBrowser(browser);
+    //@Test(dataProvider = "getData")
+    //public void doLogin(String username, String password, String browser){
+    @Test(dataProviderClass = DataProviders.class, dataProvider = "masterDP")
+    public void loginTest(Hashtable<String, String> data){
+        ExcelReader excel = new ExcelReader(Constants.SUITE1_XL_PATH);
+        DataUtil.checkExecution("master", "LoginTest", data.get("Runmode"), excel);
 
+        openBrowser(data.get("browser"));
         ZohoHomePage homePage = new ZohoHomePage(getDriver());
         ZohoLoginPage loginPage = homePage.gotoLoginPage();
-        loginPage.doLogin(username, password);
+        loginPage.doLogin(data.get("username"), data.get("password"));
 
         //getDriver().findElement(By.xpath("/html/body/div[1]/div[2]/div/a[3]")).click();
         //getDriver().findElement(By.xpath("//*[@id='lid']")).sendKeys(username);
@@ -29,7 +39,7 @@ public class TestCase1 extends BaseTest {
 
         quit();
     }
-
+/*
     @DataProvider(parallel = true)
     public Object[][] getData(){
         Object[][] data = new Object[2][3];
@@ -43,5 +53,5 @@ public class TestCase1 extends BaseTest {
 
         return data;
     }
-
+*/
 }
