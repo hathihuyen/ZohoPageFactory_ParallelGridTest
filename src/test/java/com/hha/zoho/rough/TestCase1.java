@@ -1,5 +1,7 @@
 package com.hha.zoho.rough;
 
+import com.hha.zoho.PageObjects.ZohoHomePage;
+import com.hha.zoho.PageObjects.ZohoLoginPage;
 import org.apache.poi.ss.formula.functions.T;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,10 +18,14 @@ public class TestCase1 extends BaseTest {
     public void doLogin(String username, String password, String browser){
         openBrowser(browser);
 
-        getDriver().findElement(By.xpath("/html/body/div[1]/div[2]/div/a[3]")).click();
-        getDriver().findElement(By.xpath("//*[@id='lid']")).sendKeys(username);
-        getDriver().findElement(By.xpath("//*[@id='pwd']")).sendKeys(password);
-        getDriver().findElement(By.xpath("//*[@id='signin_submit']")).click();
+        ZohoHomePage homePage = new ZohoHomePage(getDriver());
+        ZohoLoginPage loginPage = homePage.gotoLoginPage();
+        loginPage.doLogin(username, password);
+
+        //getDriver().findElement(By.xpath("/html/body/div[1]/div[2]/div/a[3]")).click();
+        //getDriver().findElement(By.xpath("//*[@id='lid']")).sendKeys(username);
+        //getDriver().findElement(By.xpath("//*[@id='pwd']")).sendKeys(password);
+        //getDriver().findElement(By.xpath("//*[@id='signin_submit']")).click();
 
         quit();
     }
