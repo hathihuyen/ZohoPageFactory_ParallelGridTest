@@ -1,5 +1,6 @@
 package com.hha.zoho.rough;
 
+import com.hha.zoho.Utilities.DriverManager;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,6 +16,8 @@ public class BaseTest {
     //public WebDriver driver;
     //public static ThreadLocal<WebDriver> dr = new ThreadLocal<WebDriver>(); --> Parallel
     public RemoteWebDriver driver;
+/*
+    // Already move to DriverManager.java in src/main/java/com/hha/zoho/Utilities
     public static ThreadLocal<RemoteWebDriver> dr = new ThreadLocal<RemoteWebDriver>(); //Parallell + Grid
 
     public WebDriver getDriver(){
@@ -24,7 +27,7 @@ public class BaseTest {
     public void setWebDriver(RemoteWebDriver driver){
         dr.set(driver);
     }
-
+*/
     public void openBrowser(String browser) {
 
         /*
@@ -59,14 +62,19 @@ public class BaseTest {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
+/*      //before create DriverManager class
         setWebDriver(driver);
         getDriver().manage().window().maximize();
         getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         getDriver().get("https://www.zoho.com/");
+*/
+        DriverManager.setWebDriver(driver);
+        DriverManager.getDriver().manage().window().maximize();
+        DriverManager.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        DriverManager.getDriver().get("https://www.zoho.com/");
     }
 
     public void quit(){
-        getDriver().quit();
+        DriverManager.getDriver().quit();
     }
 }

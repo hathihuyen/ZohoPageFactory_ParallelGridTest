@@ -2,10 +2,7 @@ package com.hha.zoho.rough;
 
 import com.hha.zoho.PageObjects.ZohoHomePage;
 import com.hha.zoho.PageObjects.ZohoLoginPage;
-import com.hha.zoho.Utilities.Constants;
-import com.hha.zoho.Utilities.DataProviders;
-import com.hha.zoho.Utilities.DataUtil;
-import com.hha.zoho.Utilities.ExcelReader;
+import com.hha.zoho.Utilities.*;
 import org.apache.poi.ss.formula.functions.T;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -28,7 +25,7 @@ public class LoginTest extends BaseTest {
         DataUtil.checkExecution("master", "LoginTest", data.get("Runmode"), excel);
 
         openBrowser(data.get("browser"));
-        ZohoHomePage homePage = new ZohoHomePage(getDriver());
+        ZohoHomePage homePage = new ZohoHomePage(DriverManager.getDriver());
         ZohoLoginPage loginPage = homePage.gotoLoginPage();
         loginPage.doLogin(data.get("username"), data.get("password"));
 
