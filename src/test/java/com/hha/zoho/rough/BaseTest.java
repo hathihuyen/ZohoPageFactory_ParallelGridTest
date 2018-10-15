@@ -71,7 +71,7 @@ public class BaseTest {
         DriverManager.setWebDriver(driver);
         DriverManager.getDriver().manage().window().maximize();
         DriverManager.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        DriverManager.getDriver().get("https://www.zoho.com/");
+        //DriverManager.getDriver().get("https://www.zoho.com/"); //no need this one after have BasePage class
     }
 
     public void quit(){
