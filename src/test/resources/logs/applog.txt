@@ -1,4 +1,4 @@
-INFO    2018-10-15 15:06:24,233 [main] com.hha.zoho.rough.BaseTest  - Running tests on Linux !!!
-INFO    2018-10-15 15:06:24,236 [main] com.hha.zoho.rough.BaseTest  - Configuration file loaded !!!
-INFO    2018-10-15 15:06:27,253 [TestNG-PoolService-0] com.hha.zoho.rough.BaseTest  - Chrome browser lauched !!!
-INFO    2018-10-15 15:06:30,573 [TestNG-PoolService-1] com.hha.zoho.rough.BaseTest  - FireFox browser lauched !!!
+INFO    2018-10-15 15:38:26,345 [main] com.hha.zoho.rough.BaseTest  - Running tests on Linux !!!
+INFO    2018-10-15 15:38:26,347 [main] com.hha.zoho.rough.BaseTest  - Configuration file loaded !!!
+INFO    2018-10-15 15:38:29,318 [TestNG-PoolService-0] com.hha.zoho.rough.BaseTest  - Chrome browser lauched !!!
+INFO    2018-10-15 15:38:32,509 [TestNG-PoolService-1] com.hha.zoho.rough.BaseTest  - FireFox browser lauched !!!

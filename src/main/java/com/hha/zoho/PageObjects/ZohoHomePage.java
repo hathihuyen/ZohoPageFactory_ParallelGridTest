@@ -26,7 +26,7 @@ public class ZohoHomePage extends BasePage {
     }
 
     public ZohoLoginPage gotoLoginPage(){
-        logIn.click();
+        click(logIn, "Login Link");
         //return new ZohoLoginPage(driver); //before having BasePage
         return (ZohoLoginPage) openPage(ZohoLoginPage.class);
     }

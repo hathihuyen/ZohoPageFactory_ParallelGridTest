@@ -26,9 +26,9 @@ public class ZohoLoginPage extends BasePage {
     public WebElement signIn;
 
     public ZohoLoginPage doLogin(String username, String password) {
-        user.sendKeys(username);
-        pass.sendKeys(password);
-        signIn.click();
+        type(user, username, "User Name textbox");
+        type(pass, password, "Password textbox");
+        click(signIn, "Signin button");
         return this;
     }
 

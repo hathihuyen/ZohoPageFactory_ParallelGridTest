@@ -1,7 +1,9 @@
 package com.hha.zoho.PageObjects;
 
+import com.hha.zoho.ExtentListeners.ExtentListeners;
 import com.hha.zoho.Utilities.DriverManager;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -34,5 +36,20 @@ public abstract class BasePage<T> {
         ExpectedCondition pageLoadCondition = ((BasePage)page).getPageLoadCondition();
         waitForPageToLoad(pageLoadCondition);
         return page;
+    }
+
+    /**
+     * Use these method to add information to extent report
+     * @param element
+     * @param elementName
+     */
+    public void click(WebElement element, String elementName) {
+        element.click();
+        ExtentListeners.testReport.get().info("Clicking on an Element: " + elementName);
+    }
+
+    public void type(WebElement element, String value, String elementName){
+        element.sendKeys(value);
+        ExtentListeners.testReport.get().info("Typing in: " + elementName + " and entered the value as: " + value);
     }
 }

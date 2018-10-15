@@ -1,11 +1,13 @@
 package com.hha.zoho.rough;
 
+import com.hha.zoho.ExtentListeners.ExtentListeners;
 import com.hha.zoho.Utilities.DriverFactory;
 import com.hha.zoho.Utilities.DriverManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -57,6 +59,14 @@ public class BaseTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * This method is for ExtentReport
+     * @param message that we want to add to the extent report
+     */
+    public void logInfo(String message){
+        ExtentListeners.testReport.get().info(message);
     }
 
     public void configureLogging(){
