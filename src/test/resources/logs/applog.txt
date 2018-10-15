@@ -1,10 +1,4 @@
-INFO    2018-06-13 23:51:23,383 [main] com.w2a.zoho.testcases.BaseTest  - Config properties file loaded
-INFO    2018-06-13 23:51:24,137 [TestNG-PoolService-1] com.w2a.zoho.testcases.BaseTest  - Inside Login Test
-INFO    2018-06-13 23:51:24,137 [TestNG-PoolService-0] com.w2a.zoho.testcases.BaseTest  - Inside Login Test
-INFO    2018-06-13 23:51:24,144 [TestNG-PoolService-0] com.w2a.zoho.testcases.BaseTest  - Inside Login Test
-INFO    2018-06-13 23:51:29,045 [TestNG-PoolService-0] com.w2a.zoho.testcases.BaseTest  - Driver Initialized !!!
-INFO    2018-06-13 23:51:29,046 [TestNG-PoolService-0] com.w2a.zoho.testcases.BaseTest  - Driver Initialized !!!
-INFO    2018-06-13 23:51:49,683 [TestNG-PoolService-1] com.w2a.zoho.testcases.BaseTest  - Driver Initialized !!!
-INFO    2018-06-13 23:51:57,555 [TestNG-PoolService-0] com.w2a.zoho.testcases.BaseTest  - Test Execution Completed !!!
-INFO    2018-06-13 23:52:26,510 [TestNG-PoolService-1] com.w2a.zoho.testcases.BaseTest  - Test Execution Completed !!!
-INFO    2018-06-13 23:53:12,827 [TestNG-PoolService-0] com.w2a.zoho.testcases.BaseTest  - Test Execution Completed !!!
+INFO    2018-10-15 14:17:45,910 [main] com.hha.zoho.rough.BaseTest  - Running tests on Linux !!!
+INFO    2018-10-15 14:17:45,912 [main] com.hha.zoho.rough.BaseTest  - Configuration file loaded !!!
+INFO    2018-10-15 14:17:49,169 [TestNG-PoolService-0] com.hha.zoho.rough.BaseTest  - Chrome browser lauched !!!
+INFO    2018-10-15 14:17:51,586 [TestNG-PoolService-1] com.hha.zoho.rough.BaseTest  - FireFox browser lauched !!!

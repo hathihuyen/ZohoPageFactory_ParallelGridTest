@@ -1,21 +1,68 @@
 package com.hha.zoho.rough;
 
+import com.hha.zoho.Utilities.DriverFactory;
 import com.hha.zoho.Utilities.DriverManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.annotations.BeforeSuite;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    //public WebDriver driver;
     //public static ThreadLocal<WebDriver> dr = new ThreadLocal<WebDriver>(); --> Parallel
-    public RemoteWebDriver driver;
+    //public RemoteWebDriver driver; //change to WebDriver after create DriverFactory
+    public WebDriver driver;
+    private Properties config = new Properties();
+    private FileInputStream fis;
+    public Logger log = Logger.getLogger(BaseTest.class);
+
+    @BeforeSuite
+    public void setUpFramework() {
+        configureLogging();
+        DriverFactory.setGridPath("http://localhost:4444/wd/hub");
+        DriverFactory.setConfigPropertyFile(System.getProperty("user.dir") + "//src//test//resources//properties//Config.properties");
+
+        if (System.getProperty("os.name").contains("mac")){
+            log.info("Running tests on Mac !!!");
+            DriverFactory.setGeckoDriverExePath(System.getProperty("user.dir") + "//src//test//resources//executables//geckodriver");
+            DriverFactory.setChromeDriverExePath(System.getProperty("user.dir") + "//src//test//resources//executables//chromedriver");
+        } else {
+            log.info("Running tests on " + System.getProperty("os.name") + " !!!");
+            DriverFactory.setGeckoDriverExePath(System.getProperty("user.dir") + "//src//test//resources//executables//geckodriver.exe");
+            DriverFactory.setChromeDriverExePath(System.getProperty("user.dir") + "//src//test//resources//executables//chromedriver.exe");
+            DriverFactory.setIeDriverExePath(System.getProperty("user.dir") + "//src//test//resources//executables//IEDriverServer.exe");
+        }
+
+        try {
+            fis = new FileInputStream(DriverFactory.getConfigPropertyFile());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            config.load(fis);
+            log.info("Configuration file loaded !!!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void configureLogging(){
+        String log4jConfigFile = System.getProperty("user.dir") + "//src//test//resources//properties//log4j.properties";
+        PropertyConfigurator.configure(log4jConfigFile);
+    }
 /*
     // Already move to DriverManager.java in src/main/java/com/hha/zoho/Utilities
     public static ThreadLocal<RemoteWebDriver> dr = new ThreadLocal<RemoteWebDriver>(); //Parallell + Grid
@@ -28,40 +75,50 @@ public class BaseTest {
         dr.set(driver);
     }
 */
-    public void openBrowser(String browser) {
+    public void openBrowser(String browser, boolean isRemote) {
+        DriverFactory.setRemote(isRemote);
+        if (DriverFactory.isRemote()) {
+            //These are for RemoteWebDriver
+            DesiredCapabilities cap = null;
+            if (browser.equals("chrome")) {
+                cap = DesiredCapabilities.chrome();
+                cap.setBrowserName("chrome");
+                cap.setPlatform(Platform.ANY);
+                log.info("Chrome browser lauched on Grid!!!");
+            } else if (browser.equals("firefox")){
+                cap = DesiredCapabilities.firefox();
+                cap.setBrowserName("firefox");
+                cap.setPlatform(Platform.ANY);
+                log.info("FireFox browser lauched on Grid!!!");
+            } else if (browser.equals("ie")){
+                cap = DesiredCapabilities.internetExplorer();
+                cap.setBrowserName("iexplore");
+                cap.setPlatform(Platform.WIN10);
+                log.info("IE browser lauched on Grid!!!");
+            }
 
-        /*
-        if (browser.equals("chrome")) {
-            System.out.println("Launching: " + browser);
-            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "//src//test//resources//executables//chromedriver.exe");
-            driver = new ChromeDriver();
-        } else if (browser.equals("firefox")){
-            System.out.println("Launching: " + browser);
-            System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "//src//test//resources//executables//geckodriver.exe");
-            driver = new FirefoxDriver();
-        }*/ //these are for WebDriver
-
-        //These are for RemoteWebDriver
-        DesiredCapabilities cap = null;
-        if (browser.equals("chrome")) {
-            cap = DesiredCapabilities.chrome();
-            cap.setBrowserName("chrome");
-            cap.setPlatform(Platform.ANY);
-        } else if (browser.equals("firefox")){
-            cap = DesiredCapabilities.firefox();
-            cap.setBrowserName("firefox");
-            cap.setPlatform(Platform.ANY);
-        } else if (browser.equals("ie")){
-            cap = DesiredCapabilities.internetExplorer();
-            cap.setBrowserName("iexplore");
-            cap.setPlatform(Platform.WIN10);
+            try {
+                driver = new RemoteWebDriver(new URL(DriverFactory.getGridPath()), cap);
+                log.info("Starting the session on Grid !!!");
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            if (browser.equals("chrome")) {
+                System.out.println("Launching: " + browser);
+                System.setProperty("webdriver.chrome.driver", DriverFactory.getChromeDriverExePath());
+                driver = new ChromeDriver();
+                log.info("Chrome browser lauched !!!");
+            } else if (browser.equals("firefox")) {
+                System.out.println("Launching: " + browser);
+                System.setProperty("webdriver.gecko.driver", DriverFactory.getGeckoDriverExePath());
+                driver = new FirefoxDriver();
+                log.info("FireFox browser lauched !!!");
+            }
         }
 
-        try {
-            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), cap);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+
+
 /*      //before create DriverManager class
         setWebDriver(driver);
         getDriver().manage().window().maximize();

@@ -24,7 +24,7 @@ public class LoginTest extends BaseTest {
         ExcelReader excel = new ExcelReader(Constants.SUITE1_XL_PATH);
         DataUtil.checkExecution("master", "LoginTest", data.get("Runmode"), excel);
 
-        openBrowser(data.get("browser"));
+        openBrowser(data.get("browser"), false);
         // ZohoHomePage homePage = new ZohoHomePage(DriverManager.getDriver()); //Before having BasePage.java
         ZohoHomePage homePage = new ZohoHomePage().open("https://www.zoho.com/");
         ZohoLoginPage loginPage = homePage.gotoLoginPage();
