@@ -8,6 +8,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -35,6 +38,11 @@ public class LoginTest extends BaseTest {
         //getDriver().findElement(By.xpath("//*[@id='pwd']")).sendKeys(password);
         //getDriver().findElement(By.xpath("//*[@id='signin_submit']")).click();
 
+        Assert.fail("Failing the login test");
+    }
+
+    @AfterMethod
+    public void tearDown(){
         quit();
     }
 /*
