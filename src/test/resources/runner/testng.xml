@@ -2,25 +2,27 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite" parallel="tests">
 
+    <listeners>
+        <listener class-name="com.hha.zoho.ExtentListeners.ExtentListeners"></listener>
+    </listeners>
 
-	<listeners>
+    <test verbose="2" preserve-order="true" name="Test1">
+        <classes>
+            <class name="com.hha.zoho.rough.LoginTest">
+                <methods>
+                    <include name="loginTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
-		<listener
-			class-name="com.w2a.zoho.ExtentListeners.ExtentListeners"></listener>
-
-	</listeners>
-
-	<test name="Test1">
-		<classes>
-			<class name="com.w2a.zoho.testcases.LoginTest" />
-		</classes>
-	</test> <!-- Test -->
-	
-	<test name="Test2">
-		<classes>
-			<class name="com.w2a.zoho.testcases.ValidateCRMTest" />
-		</classes>
-	</test> <!-- Test -->
-
-
-</suite> <!-- Suite -->
+    <!--test verbose="2" preserve-order="true" name="Test2">
+        <classes>
+            <class name="com.hha.zoho.rough.TestCase2">
+                <methods>
+                    <include name="doLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test-->
+</suite>

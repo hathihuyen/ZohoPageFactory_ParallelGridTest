@@ -42,14 +42,16 @@ public class LoginTest extends BaseTest {
         //getDriver().findElement(By.xpath("//*[@id='pwd']")).sendKeys(password);
         //getDriver().findElement(By.xpath("//*[@id='signin_submit']")).click();
 
-        Assert.fail("Failing the login test");
+        //Assert.fail("Failing the login test");
+        quit();
     }
-
+/*
     @AfterMethod
     public void tearDown(){
         logInfo("LoginTest Completed !!!"); //add to extent report
         quit();
     }
+*/
 /*
     @DataProvider(parallel = true)
     public Object[][] getData(){
