@@ -27,7 +27,7 @@ public class LoginTest extends BaseTest {
         ExcelReader excel = new ExcelReader(Constants.SUITE1_XL_PATH);
         DataUtil.checkExecution("master", "LoginTest", data.get("Runmode"), excel);
 
-        openBrowser(data.get("browser"), false);
+        openBrowser(data.get("browser"));
 
         logInfo("Launched Browser : " + data.get("browser")); //add this information to extent report
 

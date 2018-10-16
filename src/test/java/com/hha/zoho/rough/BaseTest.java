@@ -30,6 +30,8 @@ public class BaseTest {
     private FileInputStream fis;
     public Logger log = Logger.getLogger(BaseTest.class);
 
+    public boolean grid = false; // parameterize for Jenkin build with grid
+
     @BeforeSuite
     public void setUpFramework() {
         configureLogging();
@@ -85,8 +87,11 @@ public class BaseTest {
         dr.set(driver);
     }
 */
-    public void openBrowser(String browser, boolean isRemote) {
-        DriverFactory.setRemote(isRemote);
+    public void openBrowser(String browser) {
+        if ((System.getenv("ExecutionType") != null) && System.getenv("ExecutionType").equals("Grid"))
+            grid = true;
+
+        DriverFactory.setRemote(grid);
         if (DriverFactory.isRemote()) {
             //These are for RemoteWebDriver
             DesiredCapabilities cap = null;
