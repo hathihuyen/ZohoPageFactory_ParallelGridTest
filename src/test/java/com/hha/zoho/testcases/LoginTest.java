@@ -1,4 +1,4 @@
-package com.hha.zoho.rough;
+package com.hha.zoho.testcases;
 
 import com.hha.zoho.PageObjects.ZohoHomePage;
 import com.hha.zoho.PageObjects.ZohoLoginPage;
@@ -26,7 +26,7 @@ public class LoginTest extends BaseTest {
     public void loginTest(Hashtable<String, String> data){
         ExcelReader excel = new ExcelReader(Constants.SUITE1_XL_PATH);
         DataUtil.checkExecution("master", "LoginTest", data.get("Runmode"), excel);
-
+        log.info("Inside Login Test");
         openBrowser(data.get("browser"));
 
         logInfo("Launched Browser : " + data.get("browser")); //add this information to extent report
@@ -34,15 +34,9 @@ public class LoginTest extends BaseTest {
         // ZohoHomePage homePage = new ZohoHomePage(DriverManager.getDriver()); //Before having BasePage.java
         ZohoHomePage homePage = new ZohoHomePage().open("https://www.zoho.com/");
         ZohoLoginPage loginPage = homePage.gotoLoginPage();
-        loginPage.doLogin(data.get("username"), data.get("password"));
+        loginPage.doLoginAsInvalidUser(data.get("username"), data.get("password"));
 
         logInfo("Username entered as: " + data.get("username") + " and Password entered as: " + data.get("password")); //add to extent report
-        //getDriver().findElement(By.xpath("/html/body/div[1]/div[2]/div/a[3]")).click();
-        //getDriver().findElement(By.xpath("//*[@id='lid']")).sendKeys(username);
-        //getDriver().findElement(By.xpath("//*[@id='pwd']")).sendKeys(password);
-        //getDriver().findElement(By.xpath("//*[@id='signin_submit']")).click();
-
-        //Assert.fail("Failing the login test");
         quit();
     }
 /*
@@ -50,21 +44,6 @@ public class LoginTest extends BaseTest {
     public void tearDown(){
         logInfo("LoginTest Completed !!!"); //add to extent report
         quit();
-    }
-*/
-/*
-    @DataProvider(parallel = true)
-    public Object[][] getData(){
-        Object[][] data = new Object[2][3];
-        data[0][0] = "trainer@way2automation.com";
-        data[0][1] = "Selenium@1234";
-        data[0][2] = "chrome";
-
-        data[1][0] = "java@way2automation.com";
-        data[1][1] = "Selenium@1234";
-        data[1][2] = "firefox";
-
-        return data;
     }
 */
 }

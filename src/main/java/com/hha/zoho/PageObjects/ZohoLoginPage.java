@@ -25,11 +25,18 @@ public class ZohoLoginPage extends BasePage {
     @FindBy(xpath = "//*[@id='signin_submit']")
     public WebElement signIn;
 
-    public ZohoLoginPage doLogin(String username, String password) {
+    public ZohoLoginPage doLoginAsInvalidUser(String username, String password) {
         type(user, username, "User Name textbox");
         type(pass, password, "Password textbox");
         click(signIn, "Signin button");
         return this;
+    }
+
+    public ZohoAppPage doLoginAsValidUser(String username, String password) {
+        type(user, username, "User Name textbox");
+        type(pass, password, "Password textbox");
+        click(signIn, "Signin button");
+        return (ZohoAppPage) openPage(ZohoAppPage.class);
     }
 
     @Override

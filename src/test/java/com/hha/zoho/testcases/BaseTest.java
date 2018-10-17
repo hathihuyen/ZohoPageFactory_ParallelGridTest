@@ -1,4 +1,4 @@
-package com.hha.zoho.rough;
+package com.hha.zoho.testcases;
 
 import com.hha.zoho.ExtentListeners.ExtentListeners;
 import com.hha.zoho.Utilities.DriverFactory;
@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -30,7 +29,26 @@ public class BaseTest {
     private FileInputStream fis;
     public Logger log = Logger.getLogger(BaseTest.class);
 
+    private String defaultUserName;
+    private String defaultPassword;
+
     public boolean grid = false; // parameterize for Jenkin build with grid
+
+    public String getDefaultUserName() {
+        return defaultUserName;
+    }
+
+    public void setDefaultUserName(String defaultUserName) {
+        this.defaultUserName = defaultUserName;
+    }
+
+    public String getDefaultPassword() {
+        return defaultPassword;
+    }
+
+    public void setDefaultPassword(String defaultPassword) {
+        this.defaultPassword = defaultPassword;
+    }
 
     @BeforeSuite
     public void setUpFramework() {
@@ -92,6 +110,7 @@ public class BaseTest {
             grid = true;
 
         DriverFactory.setRemote(grid);
+        System.out.println("Remote Execution type is: " + DriverFactory.isRemote());
         if (DriverFactory.isRemote()) {
             //These are for RemoteWebDriver
             DesiredCapabilities cap = null;
@@ -144,6 +163,11 @@ public class BaseTest {
         DriverManager.getDriver().manage().window().maximize();
         DriverManager.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         //DriverManager.getDriver().get("https://www.zoho.com/"); //no need this one after have BasePage class
+
+        System.out.println("Default Username is: " + config.getProperty("defaultUserName"));
+        System.out.println("Default Password is: " + config.getProperty("defaultPassword"));
+        setDefaultUserName(config.getProperty("defaultUserName"));
+        setDefaultPassword(config.getProperty("defaultPassword"));
     }
 
     public void quit(){

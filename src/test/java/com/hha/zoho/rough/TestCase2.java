@@ -3,6 +3,7 @@ package com.hha.zoho.rough;
 import com.hha.zoho.PageObjects.ZohoHomePage;
 import com.hha.zoho.PageObjects.ZohoLoginPage;
 import com.hha.zoho.Utilities.*;
+import com.hha.zoho.testcases.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,7 +12,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.Hashtable;
-import java.util.concurrent.TimeUnit;
 
 public class TestCase2 extends BaseTest {
 
@@ -25,7 +25,7 @@ public class TestCase2 extends BaseTest {
         // ZohoHomePage homePage = new ZohoHomePage(DriverManager.getDriver()); //Before having BasePage.java
         ZohoHomePage homePage = new ZohoHomePage().open("https://www.zoho.com/");
         ZohoLoginPage loginPage = homePage.gotoLoginPage();
-        loginPage.doLogin(data.get("username"), data.get("password"));
+        loginPage.doLoginAsInvalidUser(data.get("username"), data.get("password"));
 
         quit();
     }

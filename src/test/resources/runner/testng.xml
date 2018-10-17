@@ -8,7 +8,7 @@
 
     <test verbose="2" preserve-order="true" name="Test1">
         <classes>
-            <class name="com.hha.zoho.rough.LoginTest">
+            <class name="com.hha.zoho.testcases.LoginTest">
                 <methods>
                     <include name="loginTest"/>
                 </methods>
@@ -16,13 +16,13 @@
         </classes>
     </test>
 
-    <!--test verbose="2" preserve-order="true" name="Test2">
+    <test verbose="2" preserve-order="true" name="Test2">
         <classes>
-            <class name="com.hha.zoho.rough.TestCase2">
+            <class name="com.hha.zoho.testcases.ValidateCRMTest">
                 <methods>
-                    <include name="doLogin"/>
+                    <include name="validateCRMTest"/>
                 </methods>
             </class>
         </classes>
-    </test-->
+    </test>
 </suite>
