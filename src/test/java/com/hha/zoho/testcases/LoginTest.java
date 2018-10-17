@@ -17,33 +17,26 @@ import org.testng.annotations.Test;
 import java.util.Hashtable;
 import java.util.concurrent.TimeUnit;
 
-//public class TestCase1 extends BaseTest {
 public class LoginTest extends BaseTest {
 
-    //@Test(dataProvider = "getData")
-    //public void doLogin(String username, String password, String browser){
     @Test(dataProviderClass = DataProviders.class, dataProvider = "masterDP")
     public void loginTest(Hashtable<String, String> data){
         ExcelReader excel = new ExcelReader(Constants.SUITE1_XL_PATH);
         DataUtil.checkExecution("master", "LoginTest", data.get("Runmode"), excel);
         log.info("Inside Login Test");
         openBrowser(data.get("browser"));
-
         logInfo("Launched Browser : " + data.get("browser")); //add this information to extent report
 
-        // ZohoHomePage homePage = new ZohoHomePage(DriverManager.getDriver()); //Before having BasePage.java
         ZohoHomePage homePage = new ZohoHomePage().open("https://www.zoho.com/");
         ZohoLoginPage loginPage = homePage.gotoLoginPage();
         loginPage.doLoginAsInvalidUser(data.get("username"), data.get("password"));
 
         logInfo("Username entered as: " + data.get("username") + " and Password entered as: " + data.get("password")); //add to extent report
-        quit();
     }
-/*
+
     @AfterMethod
     public void tearDown(){
         logInfo("LoginTest Completed !!!"); //add to extent report
         quit();
     }
-*/
 }

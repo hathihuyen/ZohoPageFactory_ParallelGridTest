@@ -22,8 +22,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    //public static ThreadLocal<WebDriver> dr = new ThreadLocal<WebDriver>(); --> Parallel
-    //public RemoteWebDriver driver; //change to WebDriver after create DriverFactory
+
     public WebDriver driver;
     private Properties config = new Properties();
     private FileInputStream fis;
@@ -93,18 +92,7 @@ public class BaseTest {
         String log4jConfigFile = System.getProperty("user.dir") + "//src//test//resources//properties//log4j.properties";
         PropertyConfigurator.configure(log4jConfigFile);
     }
-/*
-    // Already move to DriverManager.java in src/main/java/com/hha/zoho/Utilities
-    public static ThreadLocal<RemoteWebDriver> dr = new ThreadLocal<RemoteWebDriver>(); //Parallell + Grid
 
-    public WebDriver getDriver(){
-        return dr.get();
-    }
-
-    public void setWebDriver(RemoteWebDriver driver){
-        dr.set(driver);
-    }
-*/
     public void openBrowser(String browser) {
         if ((System.getenv("ExecutionType") != null) && System.getenv("ExecutionType").equals("Grid"))
             grid = true;
@@ -151,21 +139,10 @@ public class BaseTest {
             }
         }
 
-
-
-/*      //before create DriverManager class
-        setWebDriver(driver);
-        getDriver().manage().window().maximize();
-        getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        getDriver().get("https://www.zoho.com/");
-*/
         DriverManager.setWebDriver(driver);
         DriverManager.getDriver().manage().window().maximize();
         DriverManager.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        //DriverManager.getDriver().get("https://www.zoho.com/"); //no need this one after have BasePage class
 
-        System.out.println("Default Username is: " + config.getProperty("defaultUserName"));
-        System.out.println("Default Password is: " + config.getProperty("defaultPassword"));
         setDefaultUserName(config.getProperty("defaultUserName"));
         setDefaultPassword(config.getProperty("defaultPassword"));
     }
