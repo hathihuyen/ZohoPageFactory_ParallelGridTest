@@ -1,4 +1,4 @@
-** PageObjectModel with Page Factories **
+**PageObjectModel with Page Factories**
 > Using Selenium WebDriver to test https://www.zoho.com/ page using MultiThreading-Parallel testing. You can see the tools and frameworks using for this projects:
 
 - Page Objects 
